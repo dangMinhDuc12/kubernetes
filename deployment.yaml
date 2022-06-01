@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment #Loại service muốn tạo (Deployment, Service, Job)
+metadata:
+  name: second-app-deployment
+spec: #Thêm các tính năng cho deployment
+  replicas: 1 #Số lượng pod muốn chạy
+  selector:
+    matchLabels: #Chỉ định pod nào có label này sẽ được quản lý bỏi deployment này
+      app: second-app
+      tier: backend
+  template: #Mô tả pod (name, labels, build từ image nào,...)
+    metadata:
+      labels: #tạo label cho pod
+        app: second-app
+        tier: backend
+    spec: #Tính năng cho pod
+      containers:
+        - name: second-node
+          image: dangminhduc/kub-first-app:2
